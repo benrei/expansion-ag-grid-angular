@@ -1,0 +1,68 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "@expansion/ag-grid-angular": {
+      "projectType": "library",
+      "root": "projects/expansion/ag-grid-angular",
+      "sourceRoot": "projects/expansion/ag-grid-angular/src",
+      "prefix": "ag",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/expansion/ag-grid-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/expansion/ag-grid-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/expansion/ag-grid-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/expansion/ag-grid-angular/tsconfig.spec.json",
+            "polyfills": ["zone.js", "zone.js/testing"]
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/expansion/ag-grid-angular/.storybook",
+            "browserTarget": "@expansion/ag-grid-angular:build",
+            "compodoc": false,
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/expansion/ag-grid-angular/.storybook",
+            "browserTarget": "@expansion/ag-grid-angular:build",
+            "compodoc": false,
+            "outputDir": "storybook-static"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/expansion/ag-grid-angular/**/*.ts",
+              "projects/expansion/ag-grid-angular/**/*.html"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false,
+    "schematicCollections": ["@angular-eslint/schematics"]
+  }
+}

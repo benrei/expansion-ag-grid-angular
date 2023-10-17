@@ -1,0 +1,19 @@
+<div class="toolbar">
+  <ag-grid-toolbar-search
+    *ngIf="enableSearch"
+    [agGrid]="agGrid"
+    [debounceTime]="debounceSearch"
+    [placeholder]="placeholderSearch"
+  ></ag-grid-toolbar-search>
+  <div class="toolbar-content">
+    <div class="toolbar-content-left">
+      <ng-content select="[toolbarLeft]"></ng-content>
+    </div>
+    <div class="toolbar-content-center">
+      <ng-content select="[toolbarCenter]"></ng-content>
+    </div>
+    <div class="toolbar-content-right">
+      <ng-content select="[toolbarRight]"></ng-content>
+    </div>
+  </div>
+</div>
