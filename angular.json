@@ -7,7 +7,7 @@
       "projectType": "library",
       "root": "projects/expansion/ag-grid-angular",
       "sourceRoot": "projects/expansion/ag-grid-angular/src",
-      "prefix": "ag",
+      "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
@@ -28,33 +28,9 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/expansion/ag-grid-angular/tsconfig.spec.json",
-            "polyfills": ["zone.js", "zone.js/testing"]
-          }
-        },
-        "storybook": {
-          "builder": "@storybook/angular:start-storybook",
-          "options": {
-            "configDir": "projects/expansion/ag-grid-angular/.storybook",
-            "browserTarget": "@expansion/ag-grid-angular:build",
-            "compodoc": false,
-            "port": 6006
-          }
-        },
-        "build-storybook": {
-          "builder": "@storybook/angular:build-storybook",
-          "options": {
-            "configDir": "projects/expansion/ag-grid-angular/.storybook",
-            "browserTarget": "@expansion/ag-grid-angular:build",
-            "compodoc": false,
-            "outputDir": "storybook-static"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/expansion/ag-grid-angular/**/*.ts",
-              "projects/expansion/ag-grid-angular/**/*.html"
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
             ]
           }
         }
@@ -62,7 +38,6 @@
     }
   },
   "cli": {
-    "analytics": false,
-    "schematicCollections": ["@angular-eslint/schematics"]
+    "analytics": false
   }
 }
