@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^16.2.0",
-    "@angular/core": "^16.2.0"
+    "@angular/core": "^16.2.0",
+    "ag-grid-angular": ">=30",
+    "ag-grid-community": ">=30"
   },
   "dependencies": {
     "tslib": "^2.3.0"
