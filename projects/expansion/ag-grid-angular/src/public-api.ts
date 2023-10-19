@@ -12,3 +12,6 @@ export * from './lib/ag-grid-expansion/interfaces/ag-grid-options';
 export * from './lib/ag-grid-expansion/interfaces/ag-grid-toolbar-action';
 
 export * from './lib/ag-grid-expansion/actions-sets';
+
+export * from './lib/directives/ag-grid-directives.module';
+export * from './lib/directives/create-row.directive';
