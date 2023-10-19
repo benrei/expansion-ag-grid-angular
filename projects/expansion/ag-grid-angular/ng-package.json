@@ -1,4 +1,5 @@
 {
+  "assets": ["./src/lib/styles/*"],
   "$schema": "../../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../../dist/expansion/ag-grid-angular",
   "lib": {

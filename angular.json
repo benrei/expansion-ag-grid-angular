@@ -28,10 +28,7 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "tsConfig": "projects/expansion/ag-grid-angular/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": ["zone.js", "zone.js/testing"]
           }
         },
         "storybook": {
@@ -61,7 +58,7 @@
               "-d",
               "projects/expansion/ag-grid-angular"
             ],
-            "outputDir": "storybook-static"
+            "outputDir": "dist/storybook"
           }
         }
       }

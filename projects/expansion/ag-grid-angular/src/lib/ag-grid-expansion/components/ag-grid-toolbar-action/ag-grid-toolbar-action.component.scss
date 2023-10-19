@@ -4,20 +4,20 @@
 }
 
 .toolbar-action {
-  color: var(--grey700);
+  color: var(--ag-secondary-foreground-color);
   font-size: 24px;
   padding: 8px;
   user-select: none;
   &.disabled {
     pointer-events: none;
-    color: var(--grey300);
+    color: var(--ag-disabled-foreground-color);
   }
   &:hover {
     cursor: pointer;
-    border-radius: 4px;
-    background: var(--grey100);
+    border-radius: 3px;
+    background: var(--ag-input-disabled-border-color);
   }
   &:active {
-    background: var(--grey200);
+    background: var(--ag-border-color);
   }
 }

@@ -1,0 +1,26 @@
+@import "./colors.css";
+
+:root,
+[data-theme="default"] {
+  --primary50: var(--blueGrey50);
+  --primary100: var(--blueGrey100);
+  --primary200: var(--blueGrey200);
+  --primary300: var(--blueGrey300);
+  --primary400: var(--blueGrey400);
+  --primary500: var(--blueGrey500);
+  --primary600: var(--blueGrey600);
+  --primary700: var(--blueGrey700);
+  --primary800: var(--blueGrey800);
+  --primary900: var(--blueGrey900);
+
+  --secondary50: var(--brown50);
+  --secondary100: var(--brown100);
+  --secondary200: var(--brown200);
+  --secondary300: var(--brown300);
+  --secondary400: var(--brown400);
+  --secondary500: var(--brown500);
+  --secondary600: var(--brown600);
+  --secondary700: var(--brown700);
+  --secondary800: var(--brown800);
+  --secondary900: var(--brown900);
+}

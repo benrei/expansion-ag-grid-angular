@@ -22,12 +22,13 @@ const meta: Meta<AgGridExtensionComponent> = {
     },
     template: `
     <ag-grid-expansion
+      class="ag-theme-balham"
       [actions]="actions"
-      [enableSearch]="enableSearch"
+      [disableSearch]="disableSearch"
       [debounceSearch]="debounceSearch"
+      [enableSearch]="enableSearch"
       [placeholderSearch]="placeholderSearch">
       <ag-grid-angular
-        class="ag-theme-balham"
         style="width: 100%; height: 320px;"
         [gridOptions]="gridOptions">
       </ag-grid-angular>
@@ -40,7 +41,14 @@ const meta: Meta<AgGridExtensionComponent> = {
 export default meta;
 type Story = StoryObj<AgGridExtensionComponent>;
 
-const actions = actionsSets.standard;
+const actions = [
+  ...actionsSets.standard,
+  {
+    disabled: true,
+    icon: 'home',
+    tooltip: 'Home',
+  },
+];
 const gridOptions: AgGridOptions = {
   columnDefs: [{ field: 'make' }, { field: 'model' }, { field: 'price' }],
   enableRangeSelection: true,
@@ -54,16 +62,18 @@ const gridOptions: AgGridOptions = {
 
 export const SeachAndActions: Story = {
   args: {
-    enableSearch: true,
     debounceSearch: 500,
+    disableSearch: false,
+    enableSearch: true,
     placeholderSearch: 'Search..',
   },
 };
 
 export const ContentProjections: Story = {
   args: {
-    enableSearch: true,
     debounceSearch: 500,
+    disableSearch: false,
+    enableSearch: true,
     placeholderSearch: 'Search..',
   },
   render: (args) => ({
@@ -74,9 +84,11 @@ export const ContentProjections: Story = {
     },
     template: `
     <ag-grid-expansion
+      class="ag-theme-balham"
       [actions]="actions"
-      [enableSearch]="enableSearch"
+      [disableSearch]="disableSearch"
       [debounceSearch]="debounceSearch"
+      [enableSearch]="enableSearch"
       [placeholderSearch]="placeholderSearch">
       <div toolbarLeft>toolbarLeft</div>
       <div toolbarCenter>toolbarCenter</div>
@@ -84,7 +96,6 @@ export const ContentProjections: Story = {
       <ag-grid-toolbar-action actionsLeft tooltip="I'm here because of *actionsLeft* content projection">arrow_left</ag-grid-toolbar-action>
       <ag-grid-toolbar-action actionsRight tooltip="I'm here because of *actionsRight* content projection">arrow_right</ag-grid-toolbar-action>
       <ag-grid-angular
-        class="ag-theme-balham"
         style="width: 100%; height: 320px;"
         [gridOptions]="gridOptions">
       </ag-grid-angular>

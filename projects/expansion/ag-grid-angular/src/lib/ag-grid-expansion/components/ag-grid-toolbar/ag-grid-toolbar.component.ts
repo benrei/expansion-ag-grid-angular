@@ -9,6 +9,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 export class AgGridToolbarComponent {
   @Input() agGrid!: AgGridAngular;
   @Input() debounceSearch = 500;
+  @Input() disableSearch = false;
   @Input() enableSearch = true;
   @Input() placeholderSearch = 'Search...';
 }

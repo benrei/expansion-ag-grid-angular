@@ -12,11 +12,7 @@ import { AgGridToolbarSearchComponent } from './components/ag-grid-toolbar-searc
     AgGridToolbarActionComponent,
     AgGridToolbarSearchComponent,
   ],
-  exports: [
-    AgGridExtensionComponent,
-    AgGridToolbarComponent,
-    AgGridToolbarActionComponent,
-  ],
+  exports: [AgGridExtensionComponent, AgGridToolbarActionComponent],
   imports: [CommonModule],
 })
 export class AgGridExpansionModule {}

@@ -11,6 +11,7 @@ let timer: any;
 export class AgGridToolbarSearchComponent {
   @Input() agGrid!: AgGridAngular;
   @Input() debounceTime = 500;
+  @Input() disabled = false;
   @Input() placeholder = 'Search...';
 
   get context(): AgGridContext {

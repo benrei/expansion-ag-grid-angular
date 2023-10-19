@@ -1,5 +1,5 @@
+import { pkg } from '../constants';
 import { AgGridToolbarAction } from './interfaces/ag-grid-toolbar-action';
-import * as pkg from 'projects/expansion/ag-grid-angular/package.json';
 
 export const presetActions: {
   [key in
@@ -35,7 +35,7 @@ export const presetActions: {
         if (context?.reloadData) {
           context.reloadData(params);
         } else {
-          console.warn(`${pkg.name}: 'context.reloadData()' not defined`);
+          console.warn(`${pkg}: 'context.reloadData()' not defined`);
         }
       } else if (rowModelType === 'serverSide') {
         api.refreshServerSide({ route: [], purge: true });

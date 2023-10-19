@@ -14,6 +14,6 @@ const config: StorybookConfig = {
   docs: {
     autodocs: 'tag',
   },
-  staticDirs: ['../src/lib/ag-grid-expansion/styles'],
+  staticDirs: ['../src/lib/styles'],
 };
 export default config;

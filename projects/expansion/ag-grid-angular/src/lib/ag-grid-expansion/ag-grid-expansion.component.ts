@@ -92,12 +92,15 @@ import { actionsSets } from './actions-sets';
   selector: 'ag-grid-expansion',
   templateUrl: './ag-grid-expansion.component.html',
   styleUrls: ['./ag-grid-expansion.component.scss'],
+  host: { class: 'ag-theme-expansion' },
 })
 export class AgGridExtensionComponent {
   /** Toolbar actions */
   @Input() actions: AgGridToolbarAction[] = actionsSets.standard;
   /** Debounce in ms for seach input */
   @Input() debounceSearch = 500;
+  /** Disable search field*/
+  @Input() disableSearch = false;
   /** Enable search field*/
   @Input() enableSearch = true;
   /** Seach placeholdet text */
