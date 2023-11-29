@@ -17,6 +17,7 @@ import { actionsSets } from './actions-sets';
  * ## Features:
  * - Quick search
  * - Toolbar actions
+ * - Adapts to ag-grid themes
  *
  * ## Usage
  *
@@ -75,11 +76,12 @@ import { actionsSets } from './actions-sets';
  *
  * Works out of the box for client side grids.
  *
- * #### Server side
+ * #### Other row models
  *
  * We need to use `quickFilterText` in our datasource implementation `IServerSideDatasource` like below.
  *
  * ```ts
+ *   // server-side example
  *   export class ExampleDatasource implements IServerSideDatasource {
  *       getRows(params: IServerSideGetRowsParams): void {
  *         const { quickFilterText } = params.context as AgGridToolbarContext;

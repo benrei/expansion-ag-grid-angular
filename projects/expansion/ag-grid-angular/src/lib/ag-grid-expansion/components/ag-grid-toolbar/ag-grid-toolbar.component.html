@@ -1,4 +1,4 @@
-<div class="toolbar">
+<div class="ag-grid-toolbar">
   <ag-grid-toolbar-search
     *ngIf="enableSearch"
     [agGrid]="agGrid"
@@ -6,14 +6,14 @@
     [disabled]="disableSearch"
     [placeholder]="placeholderSearch"
   ></ag-grid-toolbar-search>
-  <div class="toolbar-content">
-    <div class="toolbar-content-left">
+  <div class="ag-grid-toolbar-content">
+    <div class="ag-grid-toolbar-content-left">
       <ng-content select="[toolbarLeft]"></ng-content>
     </div>
-    <div class="toolbar-content-center">
+    <div class="ag-grid-toolbar-content-center">
       <ng-content select="[toolbarCenter]"></ng-content>
     </div>
-    <div class="toolbar-content-right">
+    <div class="ag-grid-toolbar-content-right">
       <ng-content select="[toolbarRight]"></ng-content>
     </div>
   </div>

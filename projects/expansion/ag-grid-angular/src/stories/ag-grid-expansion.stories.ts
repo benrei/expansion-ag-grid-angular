@@ -22,7 +22,7 @@ const meta: Meta<AgGridExtensionComponent> = {
     },
     template: `
     <ag-grid-expansion
-      class="ag-theme-balham"
+      [class]="agTheme"
       [actions]="actions"
       [disableSearch]="disableSearch"
       [debounceSearch]="debounceSearch"

@@ -1,14 +1,16 @@
-.toolbar {
+.ag-grid-toolbar {
   align-items: center;
   background: var(--ag-header-background-color);
-  border: 1px solid var(--ag-border-color);
+  border: var(--ag-borders) var(--ag-border-color);
+  border-top-left-radius: var(--ag-wrapper-border-radius);
+  border-top-right-radius: var(--ag-wrapper-border-radius);
   border-bottom: none;
   display: flex;
   height: 48px;
   overflow-x: auto;
   padding: 0px 8px;
 }
-.toolbar-content {
+.ag-grid-toolbar-content {
   width: 100%;
   display: flex;
   justify-content: space-between;

@@ -9,6 +9,10 @@
     height: calc(100% - 62px);
     margin-top: 70px;
   }
+  ::ng-deep .ag-root-wrapper {
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+  }
 }
 
 ::ng-deep .toolbar-action-separator {
