@@ -5,21 +5,26 @@ import {
   Input,
 } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import {
-  AgGridToolbarAction,
-  AgGridToolbarActionEvent,
-} from './interfaces/ag-grid-toolbar-action';
-import { AgGridContext } from './interfaces/ag-grid-context';
+import { AgGridToolbarAction } from './interfaces/ag-grid-toolbar-action';
 import { actionsSets } from './actions-sets';
+import { AgGridEvent } from 'ag-grid-community';
 
 /**
  * Expands ag-grid with a toolbar, search and actions.
  * ## Features:
  * - Quick search
  * - Toolbar actions
+ * - Content projections
+ *   - Multi-slot
+ *     - `toolbarLeft` => Toolbar left
+ *     - `toolbarCenter` => Toolbar center
+ *     - `toolbarRight` => Toolbar right
+ *     - `actionsLeft` => pre actions
+ *     - `actionsRight` => post actions
+ *   - Single-slot
  * - Adapts to ag-grid themes
  *
- * ## Usage
+ * ## Component overview
  *
  * **Class:** `AgGridExtensionComponent`
  *
@@ -28,47 +33,11 @@ import { actionsSets } from './actions-sets';
  * - `presetActions: AgGridToolbarAction` => Predefined single actions. Fit columns, reset columns, cvs export etc
  *
  * **Interfaces:**
- * - `AgGridOptions` => `GridOptions` with `gridOptions.context` typed as `AgGridContext`
- * - `AgGridContext` => Interface for ag-grid `context`
- * - `AgGridFilter` => Interface for grid filter
- * - `AgGridFilters` => Interface for object of `AgGridFilter`'s
  * - `AgGridToolbarAction` => Properties for a toolbar action
- * - `AgGridToolbarActionEvent` => Type for the toolbar action click callback function
  *
  * **Module:** `import { AgGridExpansionModule } from '@expansion/ag-grid-angular';`
  *
  * **Selector:** `ag-grid-expansion`
- *
- * **Content projection:**
- * - Multi-slot
- *   - `toolbarLeft` => Toolbar left
- *   - `toolbarCenter` => Toolbar center
- *   - `toolbarRight` => Toolbar right
- *   - `actionsLeft` => pre actions
- *   - `actionsRight` => post actions
- * - Single-slot
- *
- * ### Typescript
- * ```ts
- * export class ExampleGridComponent {
- *   actions: AgGridToolbarAction[];
- *   gridOptions: AgGridOptions;
- * }
- * ```
- *
- * ### HTML
- * ```html
- * <ag-grid-expansion [actions]="actions">
- *   <ag-grid-angular
- *     class="ag-theme-balham"
- *     [gridOptions]="gridOptions">
- *   </ag-grid-angular>
- * </ag-grid-expansion>
- * ```
- *
- * ## Technical requirements
- *
- * Either `context` or `gridOptions.context` must exist on the `ag-grid-angular` element.
  *
  * ### Global search
  *
@@ -78,7 +47,7 @@ import { actionsSets } from './actions-sets';
  *
  * #### Other row models
  *
- * We need to use `quickFilterText` in our datasource implementation `IServerSideDatasource` like below.
+ * Use `context.quickFilterText` in custom datasource implementation `IServerSideDatasource` like below.
  *
  * ```ts
  *   // server-side example
@@ -88,6 +57,25 @@ import { actionsSets } from './actions-sets';
  *         // Then use `quickFilterText` in backend call etc..
  *       }
  *   }
+ * ```
+ *
+ * ### Code example
+ *
+ * ```ts
+ * @Component({
+ *   standalone: true,
+ *   selector: 'app-demo-grid',
+ *   imports: [AgGridExpansionModule],
+ *   template: `
+ *     <ag-grid-expansion class="ag-theme-balham" [actions]="actions">
+ *       <ag-grid-angular [gridOptions]="gridOptions"></ag-grid-angular>
+ *     </ag-grid-expansion>
+ *   `,
+ * })
+ * export class DemoGridComponent {
+ *   actions: AgGridToolbarAction[];
+ *   gridOptions: GridOptions;
+ * }
  * ```
  */
 @Component({
@@ -108,21 +96,20 @@ export class AgGridExtensionComponent {
   /** Seach placeholdet text */
   @Input() placeholderSearch = 'Search...';
 
-  context!: AgGridContext;
-
   @ContentChild(AgGridAngular) agGrid!: AgGridAngular;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  get toolbarActionEvent(): AgGridToolbarActionEvent {
-    return {
-      api: this.agGrid.api,
-      context: this.context,
-    };
+  get context(): any {
+    return this.agGrid.context || this.agGrid.gridOptions?.context;
+  }
+
+  get toolbarActionEvent(): AgGridEvent {
+    const context = this.agGrid.context || this.agGrid.gridOptions?.context;
+    return { api: this.agGrid.api, context } as AgGridEvent;
   }
 
   ngAfterViewInit(): void {
-    this.context = this.agGrid.context || this.agGrid.gridOptions?.context;
     // agGrid changes after initializing itself
     this.cdr.detectChanges();
   }

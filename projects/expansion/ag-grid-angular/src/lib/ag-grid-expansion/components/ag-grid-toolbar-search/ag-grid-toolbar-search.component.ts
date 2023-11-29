@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { AgGridContext } from '../../interfaces/ag-grid-context';
 
 let timer: any;
 @Component({
@@ -14,7 +13,7 @@ export class AgGridToolbarSearchComponent {
   @Input() disabled = false;
   @Input() placeholder = 'Search...';
 
-  get context(): AgGridContext {
+  get context(): { quickFilterText: string } {
     return this.agGrid.context || this.agGrid.gridOptions?.context;
   }
 

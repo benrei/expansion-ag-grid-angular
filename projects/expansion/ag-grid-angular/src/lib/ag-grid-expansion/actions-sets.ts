@@ -1,14 +1,7 @@
-import { pkg } from '../constants';
 import { AgGridToolbarAction } from './interfaces/ag-grid-toolbar-action';
 
 export const presetActions: {
-  [key in
-    | 'export'
-    | 'fit'
-    | 'reload'
-    | 'reset'
-    | 'redo'
-    | 'undo']: AgGridToolbarAction;
+  [key in 'export' | 'fit' | 'reset' | 'redo' | 'undo']: AgGridToolbarAction;
 } = {
   export: {
     icon: 'file_download',
@@ -22,24 +15,6 @@ export const presetActions: {
     tooltip: 'Fit columns',
     clickFn: ({ api }) => {
       api.sizeColumnsToFit();
-    },
-  },
-  /** Requires `context.reloadData` arrow function for client-side */
-  reload: {
-    icon: 'refresh',
-    tooltip: 'Reload data',
-    clickFn: (params) => {
-      const { api, context } = params;
-      const rowModelType = api.getModel().getType();
-      if (rowModelType === 'clientSide') {
-        if (context?.reloadData) {
-          context.reloadData(params);
-        } else {
-          console.warn(`${pkg}: 'context.reloadData()' not defined`);
-        }
-      } else if (rowModelType === 'serverSide') {
-        api.refreshServerSide({ route: [], purge: true });
-      }
     },
   },
   redo: {
@@ -67,11 +42,5 @@ export const presetActions: {
 
 export const actionsSets = {
   redoUndo: [presetActions.redo, presetActions.undo],
-  standard: [
-    presetActions.reset,
-    presetActions.fit,
-    presetActions.reload,
-    {},
-    presetActions.export,
-  ],
+  standard: [presetActions.reset, presetActions.fit, {}, presetActions.export],
 };

@@ -1,6 +1,6 @@
-import { AgGridEvent } from './ag-grid-event';
+import { AgGridEvent } from 'ag-grid-community';
 
-export interface AgGridToolbarAction<TData = any> {
+export interface AgGridToolbarAction<TData = any, TContext = any> {
   /** Action color */
   color?: string;
   /** Default: `false`. */
@@ -12,7 +12,5 @@ export interface AgGridToolbarAction<TData = any> {
   /** tooltip translated text. */
   tooltip?: string;
   /** Arrow function to execute on click. */
-  clickFn?: (event: AgGridToolbarActionEvent<TData>) => void;
+  clickFn?: (event: AgGridEvent<TData, TContext>) => void;
 }
-export interface AgGridToolbarActionEvent<TData = any>
-  extends AgGridEvent<TData> {}

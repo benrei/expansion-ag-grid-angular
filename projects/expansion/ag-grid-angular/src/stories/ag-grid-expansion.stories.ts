@@ -3,9 +3,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import {
   AgGridExpansionModule,
   AgGridExtensionComponent,
-  AgGridOptions,
   actionsSets,
 } from '../public-api';
+import { GridOptions } from 'ag-grid-community';
 
 const meta: Meta<AgGridExtensionComponent> = {
   component: AgGridExtensionComponent,
@@ -49,7 +49,7 @@ const actions = [
     tooltip: 'Home',
   },
 ];
-const gridOptions: AgGridOptions = {
+const gridOptions: GridOptions = {
   columnDefs: [{ field: 'make' }, { field: 'model' }, { field: 'price' }],
   enableRangeSelection: true,
   rowData: [
@@ -84,7 +84,7 @@ export const ContentProjections: Story = {
     },
     template: `
     <ag-grid-expansion
-      class="ag-theme-balham"
+      [class]="agTheme"
       [actions]="actions"
       [disableSearch]="disableSearch"
       [debounceSearch]="debounceSearch"
