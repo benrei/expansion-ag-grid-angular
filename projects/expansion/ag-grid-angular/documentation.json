@@ -701,7 +701,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ":host {\r\n  display: flex;\r\n  height: 100%;\r\n  flex-direction: column;\r\n  ::ng-deep ag-grid-angular {\r\n    height: 100%;\r\n  }\r\n  ::ng-deep .ag-overlay {\r\n    height: calc(100% - 62px);\r\n    margin-top: 70px;\r\n  }\r\n}\r\n\r\n::ng-deep .toolbar-action-separator {\r\n  border-right: 1px solid var(--ag-border-color);\r\n  height: 22px;\r\n}\r\n\r\n.ag-theme-expansion {\r\n}\r\n",
+                    "data": ":host {\r\n  display: flex;\r\n  height: 100%;\r\n  flex-direction: column;\r\n  ::ng-deep ag-grid-angular {\r\n    height: 100%;\r\n  }\r\n  ::ng-deep .ag-overlay {\r\n    height: calc(100% - 62px);\r\n    margin-top: 70px;\r\n  }\r\n}\r\n\r\n::ng-deep .toolbar-action-separator {\r\n  border-right: 1px solid var(--ag-border-color);\r\n  height: 22px;\r\n}\r\n",
                     "styleUrl": "./ag-grid-expansion.component.scss"
                 }
             ],
@@ -1051,7 +1051,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "input {\r\n  border: 1px solid var(--ag-border-color);\r\n  border-radius: 4px;\r\n  height: 30px;\r\n  padding: 0px 8px 0px 28px;\r\n  &:hover:not(:disabled) {\r\n    border-color: var(--ag-range-selection-border-color);\r\n  }\r\n  &:focus-visible {\r\n    outline: none;\r\n    border-color: var(--ag-range-selection-border-color);\r\n  }\r\n  &:disabled {\r\n    background-color: var(--grey100);\r\n  }\r\n  background: white\r\n    url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='gray' width='16' height='16' viewBox='0 0 16 16'><path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' ></path></svg>\")\r\n    no-repeat 8px center;\r\n}\r\n",
+                    "data": "input {\r\n  border: 1px solid var(--ag-border-color);\r\n  border-radius: 4px;\r\n  height: 30px;\r\n  padding: 0px 8px 0px 28px;\r\n  &:hover:not(:disabled) {\r\n    border-color: var(--ag-range-selection-border-color);\r\n  }\r\n  &:focus-visible {\r\n    outline: none;\r\n    border-color: var(--ag-range-selection-border-color);\r\n  }\r\n  &:disabled {\r\n    background-color: var(--ag-input-disabled-background-color);\r\n  }\r\n  background: white\r\n    url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' fill='gray' width='16' height='16' viewBox='0 0 16 16'><path d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z' ></path></svg>\")\r\n    no-repeat 8px center;\r\n}\r\n",
                     "styleUrl": "./ag-grid-toolbar-search.component.scss"
                 }
             ],
@@ -1159,7 +1159,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    enableSearch: true,\r\n    debounceSearch: 500,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "gridOptions",
@@ -1189,7 +1189,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AgGridExtensionComponent>",
-                "defaultValue": "{\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n  tags: ['autodocs'],\r\n}"
+                "defaultValue": "{\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n  tags: ['autodocs'],\r\n}"
             },
             {
                 "name": "pkg",
@@ -1229,7 +1229,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    enableSearch: true,\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n}"
             },
             {
                 "name": "timer",
@@ -1307,7 +1307,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    enableSearch: true,\r\n    debounceSearch: 500,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
                 },
                 {
                     "name": "gridOptions",
@@ -1327,7 +1327,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AgGridExtensionComponent>",
-                    "defaultValue": "{\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n  tags: ['autodocs'],\r\n}"
+                    "defaultValue": "{\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      class=\"ag-theme-balham\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n  tags: ['autodocs'],\r\n}"
                 },
                 {
                     "name": "SeachAndActions",
@@ -1337,7 +1337,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    enableSearch: true,\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n}"
                 }
             ],
             "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/actions-sets.ts": [

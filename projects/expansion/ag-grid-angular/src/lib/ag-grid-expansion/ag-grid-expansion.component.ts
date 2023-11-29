@@ -115,7 +115,6 @@ export class AgGridExtensionComponent {
   get toolbarActionEvent(): AgGridToolbarActionEvent {
     return {
       api: this.agGrid.api,
-      columnApi: this.agGrid.columnApi,
       context: this.context,
     };
   }

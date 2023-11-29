@@ -45,22 +45,22 @@ export const presetActions: {
   redo: {
     icon: 'redo',
     tooltip: 'Redo',
-    clickFn: ({ columnApi }) => {
-      columnApi.resetColumnState();
+    clickFn: ({ api }) => {
+      api.resetColumnState();
     },
   },
   reset: {
     icon: 'restart_alt',
     tooltip: 'Reset columns',
-    clickFn: ({ columnApi }) => {
-      columnApi.resetColumnState();
+    clickFn: ({ api }) => {
+      api.resetColumnState();
     },
   },
   undo: {
     icon: 'undo',
     tooltip: 'Undo',
-    clickFn: ({ columnApi }) => {
-      columnApi.resetColumnState();
+    clickFn: ({ api }) => {
+      api.resetColumnState();
     },
   },
 };
@@ -74,5 +74,4 @@ export const actionsSets = {
     {},
     presetActions.export,
   ],
-  utility: [presetActions.reset, presetActions.fit, presetActions.reload],
 };
