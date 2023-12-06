@@ -4,7 +4,7 @@ import {
   IServerSideGetRowsRequest,
 } from 'ag-grid-community';
 @Injectable({ providedIn: 'root' })
-export class ServerSideDatasourceService {
+export class DatasourceService {
   constructor() {}
 
   createServerSideDatasource(dataCount = 100): IServerSideDatasource {
@@ -30,10 +30,12 @@ export class ServerSideDatasourceService {
   generateItems(dataCount: number): any[] {
     const items: any[] = [];
     for (let i = 0; i <= dataCount; i++) {
+      const brand = generateRandomBrand();
       items.push({
         id: i,
-        brand: generateRandomBrand(),
-        model: generateRandomModel(),
+        brand: brand,
+        isNew: Math.random() > 0.5,
+        model: generateRandomModel(brand),
         price: generateRandomPrice(),
       });
     }
@@ -57,27 +59,36 @@ export class ServerSideDatasourceService {
 // Generate 97 more items with random data
 const items = [];
 for (let i = 0; i <= 100; i++) {
+  const brand = generateRandomBrand();
   items.push({
     id: i,
-    brand: generateRandomBrand(),
-    model: generateRandomModel(),
+    brand: brand,
+    isNew: Math.random() > 0.5,
+    model: generateRandomModel(brand),
     price: generateRandomPrice(),
   });
 }
 
 // Function to generate random make
 function generateRandomBrand() {
-  const brand = ['Honda', 'Chevrolet', 'Nissan', 'Volkswagen', 'Hyundai'];
+  const brand = ['BMW', 'Honda', 'Tesla', 'Volkswagen'];
   return brand[Math.floor(Math.random() * brand.length)];
 }
 
 // Function to generate random model
-function generateRandomModel() {
-  const models = ['Civic', 'Malibu', 'Altima', 'Jetta', 'Elantra'];
+function generateRandomModel(brand: string) {
+  const allModels: any = {
+    BMW: ['X1', 'X2', 'X3', 'X4', 'X5', 'X6', 'X7'],
+    Honda: ['Accord', 'Civic'],
+    Tesla: ['Model S', 'Model 3', 'Model X', 'Model Y', 'Cybertruck'],
+    Volkswagen: ['e-Up', 'Golf', 'Polo'],
+  };
+  const models = allModels[brand];
   return models[Math.floor(Math.random() * models.length)];
 }
 
 // Function to generate random price
 function generateRandomPrice() {
-  return Math.floor(Math.random() * 50000) + 20000;
+  const price = Math.floor(Math.random() * 50000) + 20000;
+  return Math.round(price / 100) * 100;
 }

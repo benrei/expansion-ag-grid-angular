@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   ContentChild,
@@ -11,6 +12,19 @@ import { AgGridEvent } from 'ag-grid-community';
 
 /**
  * Expands ag-grid with a toolbar, search and actions.
+ *
+ * ### Prerequisites
+ *
+ * - [Ag Grid Angular](https://www.ag-grid.com/angular-data-grid/getting-started/)
+ * - [Material Icons font](https://fonts.google.com/icons?icon.set=Material+Icons&icon.style=Outlined)
+ *   - [Setup font](https://developers.google.com/fonts/docs/material_icons#icon_font_for_the_web): add in `index.html` or similar
+ *
+ * ```html
+ * <html>
+ *   <head>
+ *     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+ * ```
+ *
  * ## Features:
  * - Quick search
  * - Toolbar actions
@@ -33,6 +47,7 @@ import { AgGridEvent } from 'ag-grid-community';
  * - `presetActions: AgGridToolbarAction` => Predefined single actions. Fit columns, reset columns, cvs export etc
  *
  * **Interfaces:**
+ * - `AgGridContext` => Properties this component adds to `gridOptions.context`
  * - `AgGridToolbarAction` => Properties for a toolbar action
  *
  * **Module:** `import { AgGridExpansionModule } from '@expansion/ag-grid-angular';`
@@ -84,7 +99,7 @@ import { AgGridEvent } from 'ag-grid-community';
   styleUrls: ['./ag-grid-expansion.component.scss'],
   host: { class: 'ag-theme-expansion' },
 })
-export class AgGridExtensionComponent {
+export class AgGridExtensionComponent implements AfterViewInit {
   /** Toolbar actions */
   @Input() actions: AgGridToolbarAction[] = actionsSets.standard;
   /** Debounce in ms for seach input */
@@ -110,6 +125,12 @@ export class AgGridExtensionComponent {
   }
 
   ngAfterViewInit(): void {
+    if (!this.context) {
+      const context = { actions: this.actions };
+      this.agGrid.api.setGridOption('context', context);
+    } else {
+      this.context.actions = this.actions;
+    }
     // agGrid changes after initializing itself
     this.cdr.detectChanges();
   }

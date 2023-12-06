@@ -10,7 +10,10 @@
   user-select: none;
   &.disabled {
     pointer-events: none;
-    color: var(--ag-disabled-foreground-color);
+    color: var(
+      --ag-disabled-foreground-color,
+      --ag-input-disabled-border-color
+    );
   }
   &:hover {
     cursor: pointer;

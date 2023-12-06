@@ -18,10 +18,11 @@ export const presetActions: {
     },
   },
   redo: {
+    disabled: true,
     icon: 'redo',
     tooltip: 'Redo',
     clickFn: ({ api }) => {
-      api.resetColumnState();
+      api.redoCellEditing();
     },
   },
   reset: {
@@ -32,15 +33,16 @@ export const presetActions: {
     },
   },
   undo: {
+    disabled: true,
     icon: 'undo',
     tooltip: 'Undo',
     clickFn: ({ api }) => {
-      api.resetColumnState();
+      api.undoCellEditing();
     },
   },
 };
 
 export const actionsSets = {
   redoUndo: [presetActions.redo, presetActions.undo],
-  standard: [presetActions.reset, presetActions.fit, {}, presetActions.export],
+  standard: [presetActions.reset, presetActions.fit, presetActions.export],
 };

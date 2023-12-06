@@ -3,24 +3,50 @@ import { AgGridModule } from 'ag-grid-angular';
 import {
   AgGridExpansionModule,
   AgGridExtensionComponent,
+  AgGridToolbarAction,
   actionsSets,
 } from '../public-api';
-import { GridOptions } from 'ag-grid-community';
+import { gridOptions } from './story-helpers/grid-options';
+
+const actions: AgGridToolbarAction[] = [
+  {
+    clickFn: ({ api }) => {
+      api.applyTransaction({ add: [{}] });
+    },
+    icon: 'add',
+    tooltip: 'Add new row',
+  },
+  {
+    clickFn: ({ api }) => {
+      const rows = api.getSelectedRows();
+      api.applyTransaction({ remove: rows });
+    },
+    disabled: true,
+    icon: 'delete',
+    tooltip: 'Delete selected row(s)',
+  },
+  {},
+  ...actionsSets.redoUndo,
+  {},
+  ...actionsSets.standard,
+];
 
 const meta: Meta<AgGridExtensionComponent> = {
+  title: 'Ag Grid Extension',
   component: AgGridExtensionComponent,
   decorators: [
     moduleMetadata({
       imports: [AgGridModule, AgGridExpansionModule],
     }),
   ],
-  render: (args) => ({
-    props: {
-      ...args,
-      actions,
-      gridOptions,
-    },
-    template: `
+  render: (args) => {
+    return {
+      props: {
+        ...args,
+        actions,
+        gridOptions,
+      },
+      template: `
     <ag-grid-expansion
       [class]="agTheme"
       [actions]="actions"
@@ -29,39 +55,22 @@ const meta: Meta<AgGridExtensionComponent> = {
       [enableSearch]="enableSearch"
       [placeholderSearch]="placeholderSearch">
       <ag-grid-angular
-        style="width: 100%; height: 320px;"
+        style="width: 100%; height: 700px;"
         [gridOptions]="gridOptions">
       </ag-grid-angular>
     </ag-grid-expansion>
     `,
-  }),
+    };
+  },
   tags: ['autodocs'],
 };
 
 export default meta;
 type Story = StoryObj<AgGridExtensionComponent>;
 
-const actions = [
-  ...actionsSets.standard,
-  {
-    disabled: true,
-    icon: 'home',
-    tooltip: 'Home',
-  },
-];
-const gridOptions: GridOptions = {
-  columnDefs: [{ field: 'make' }, { field: 'model' }, { field: 'price' }],
-  enableRangeSelection: true,
-  rowData: [
-    { make: 'Toyota', model: 'Celica', price: 35000 },
-    { make: 'Ford', model: 'Mondeo', price: 32000 },
-    { make: 'Porsche', model: 'Boxster', price: 72000 },
-  ],
-  rowSelection: 'single',
-};
-
 export const SeachAndActions: Story = {
   args: {
+    actions: actions,
     debounceSearch: 500,
     disableSearch: false,
     enableSearch: true,
@@ -71,6 +80,7 @@ export const SeachAndActions: Story = {
 
 export const ContentProjections: Story = {
   args: {
+    actions: actions,
     debounceSearch: 500,
     disableSearch: false,
     enableSearch: true,

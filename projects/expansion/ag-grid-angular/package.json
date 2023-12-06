@@ -1,6 +1,6 @@
 {
   "name": "@expansion/ag-grid-angular",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "peerDependencies": {
     "@angular/common": ">=15",
     "@angular/core": ">=15",
@@ -10,5 +10,22 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "bugs": {
+    "url": "https://github.com/benrei/expansion-ag-grid-angular/issues"
+  },
+  "homepage": "http://benrei.github.io/expansion-ag-grid-angular",
+  "license": "ISC",
+  "keywords": [
+    "ag-grid",
+    "ag-grid-angular",
+    "angular",
+    "expansion",
+    "extension",
+    "grid"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benrei/expansion-ag-grid-angular.git"
+  }
 }
