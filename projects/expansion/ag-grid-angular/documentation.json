@@ -561,7 +561,7 @@
             ],
             "stylesData": "",
             "extends": [],
-            "templateData": "<span\r\n  class=\"toolbar-action material-icons-outlined\"\r\n  [class.disabled]=\"disabled\"\r\n  [id]=\"id\"\r\n  [style.color]=\"color\"\r\n  [title]=\"tooltip\"\r\n>\r\n  {{ icon }}<ng-content></ng-content>\r\n</span>\r\n"
+            "templateData": "<span\r\n  class=\"toolbar-action material-icons-outlined\"\r\n  [class.disabled]=\"disabled\"\r\n  [id]=\"id\"\r\n  [style.color]=\"disabled ? '' : color\"\r\n  [title]=\"tooltip\"\r\n>\r\n  {{ icon }}<ng-content></ng-content>\r\n</span>\r\n"
         },
         {
             "name": "AgGridToolbarComponent",
@@ -863,11 +863,11 @@
                 "name": "actions",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "AgGridToolbarAction[]",
-                "defaultValue": "[\r\n  {\r\n    clickFn: ({ api }) => {\r\n      api.applyTransaction({ add: [{}] });\r\n    },\r\n    icon: 'add',\r\n    tooltip: 'Add new row',\r\n  },\r\n  {\r\n    clickFn: ({ api }) => {\r\n      const rows = api.getSelectedRows();\r\n      api.applyTransaction({ remove: rows });\r\n    },\r\n    disabled: true,\r\n    icon: 'delete',\r\n    tooltip: 'Delete selected row(s)',\r\n  },\r\n  {},\r\n  ...actionsSets.redoUndo,\r\n  {},\r\n  ...actionsSets.standard,\r\n]"
+                "defaultValue": "[\r\n  {\r\n    clickFn: ({ api }) => {\r\n      const data = { id: Number((Math.random() * 1000).toFixed(0)) };\r\n      const transaction = api.applyTransaction({ add: [data] });\r\n      api.flashCells({ rowNodes: transaction?.add });\r\n    },\r\n    color: 'forestgreen',\r\n    icon: 'add_circle',\r\n    tooltip: 'Add new row',\r\n  },\r\n  {\r\n    clickFn: () => {\r\n      alert('Edit action clicked');\r\n    },\r\n    color: 'dodgerblue',\r\n    disabled: true,\r\n    icon: 'edit',\r\n    tooltip: 'Edit',\r\n  },\r\n  {\r\n    clickFn: ({ api }) => {\r\n      const rows = api.getSelectedRows();\r\n      api.applyTransaction({ remove: rows });\r\n    },\r\n    color: 'crimson',\r\n    disabled: true,\r\n    icon: 'delete',\r\n    tooltip: 'Delete selected row(s)',\r\n  },\r\n  {},\r\n  ...actionsSets.redoUndo,\r\n  {},\r\n  ...actionsSets.standard,\r\n]"
             },
             {
                 "name": "actionsSets",
@@ -883,11 +883,11 @@
                 "name": "ContentProjections",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "{\r\n  args: {\r\n    actions: actions,\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
+                "defaultValue": "{\r\n  args: {\r\n    actions: actions,\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
             },
             {
                 "name": "datasourceService",
@@ -933,11 +933,11 @@
                 "name": "meta",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Meta<AgGridExtensionComponent>",
-                "defaultValue": "{\r\n  title: 'Ag Grid Extension',\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => {\r\n    return {\r\n      props: {\r\n        ...args,\r\n        actions,\r\n        gridOptions,\r\n      },\r\n      template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 700px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n    };\r\n  },\r\n  tags: ['autodocs'],\r\n}"
+                "defaultValue": "{\r\n  title: 'Ag Grid Extension',\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => {\r\n    return {\r\n      props: {\r\n        ...args,\r\n        gridOptions,\r\n      },\r\n      template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 700px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n    };\r\n  },\r\n  tags: ['autodocs'],\r\n}"
             },
             {
                 "name": "pkg",
@@ -973,7 +973,7 @@
                 "name": "SeachAndActions",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -1045,7 +1045,7 @@
                 "ctype": "miscellaneous",
                 "subtype": "typealias",
                 "rawtype": "StoryObj<AgGridExtensionComponent>",
-                "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "description": "",
@@ -1054,42 +1054,42 @@
         ],
         "enumerations": [],
         "groupedVariables": {
-            "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts": [
+            "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts": [
                 {
                     "name": "actions",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                    "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "AgGridToolbarAction[]",
-                    "defaultValue": "[\r\n  {\r\n    clickFn: ({ api }) => {\r\n      api.applyTransaction({ add: [{}] });\r\n    },\r\n    icon: 'add',\r\n    tooltip: 'Add new row',\r\n  },\r\n  {\r\n    clickFn: ({ api }) => {\r\n      const rows = api.getSelectedRows();\r\n      api.applyTransaction({ remove: rows });\r\n    },\r\n    disabled: true,\r\n    icon: 'delete',\r\n    tooltip: 'Delete selected row(s)',\r\n  },\r\n  {},\r\n  ...actionsSets.redoUndo,\r\n  {},\r\n  ...actionsSets.standard,\r\n]"
+                    "defaultValue": "[\r\n  {\r\n    clickFn: ({ api }) => {\r\n      const data = { id: Number((Math.random() * 1000).toFixed(0)) };\r\n      const transaction = api.applyTransaction({ add: [data] });\r\n      api.flashCells({ rowNodes: transaction?.add });\r\n    },\r\n    color: 'forestgreen',\r\n    icon: 'add_circle',\r\n    tooltip: 'Add new row',\r\n  },\r\n  {\r\n    clickFn: () => {\r\n      alert('Edit action clicked');\r\n    },\r\n    color: 'dodgerblue',\r\n    disabled: true,\r\n    icon: 'edit',\r\n    tooltip: 'Edit',\r\n  },\r\n  {\r\n    clickFn: ({ api }) => {\r\n      const rows = api.getSelectedRows();\r\n      api.applyTransaction({ remove: rows });\r\n    },\r\n    color: 'crimson',\r\n    disabled: true,\r\n    icon: 'delete',\r\n    tooltip: 'Delete selected row(s)',\r\n  },\r\n  {},\r\n  ...actionsSets.redoUndo,\r\n  {},\r\n  ...actionsSets.standard,\r\n]"
                 },
                 {
                     "name": "ContentProjections",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                    "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "{\r\n  args: {\r\n    actions: actions,\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      actions,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
+                    "defaultValue": "{\r\n  args: {\r\n    actions: actions,\r\n    debounceSearch: 500,\r\n    disableSearch: false,\r\n    enableSearch: true,\r\n    placeholderSearch: 'Search..',\r\n  },\r\n  render: (args) => ({\r\n    props: {\r\n      ...args,\r\n      gridOptions,\r\n    },\r\n    template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <div toolbarLeft>toolbarLeft</div>\r\n      <div toolbarCenter>toolbarCenter</div>\r\n      <div toolbarRight>toolbarRight</div>\r\n      <ag-grid-toolbar-action actionsLeft tooltip=\"I'm here because of *actionsLeft* content projection\">arrow_left</ag-grid-toolbar-action>\r\n      <ag-grid-toolbar-action actionsRight tooltip=\"I'm here because of *actionsRight* content projection\">arrow_right</ag-grid-toolbar-action>\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 320px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n  }),\r\n}"
                 },
                 {
                     "name": "meta",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                    "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Meta<AgGridExtensionComponent>",
-                    "defaultValue": "{\r\n  title: 'Ag Grid Extension',\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => {\r\n    return {\r\n      props: {\r\n        ...args,\r\n        actions,\r\n        gridOptions,\r\n      },\r\n      template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 700px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n    };\r\n  },\r\n  tags: ['autodocs'],\r\n}"
+                    "defaultValue": "{\r\n  title: 'Ag Grid Extension',\r\n  component: AgGridExtensionComponent,\r\n  decorators: [\r\n    moduleMetadata({\r\n      imports: [AgGridModule, AgGridExpansionModule],\r\n    }),\r\n  ],\r\n  render: (args) => {\r\n    return {\r\n      props: {\r\n        ...args,\r\n        gridOptions,\r\n      },\r\n      template: `\r\n    <ag-grid-expansion\r\n      [class]=\"agTheme\"\r\n      [actions]=\"actions\"\r\n      [disableSearch]=\"disableSearch\"\r\n      [debounceSearch]=\"debounceSearch\"\r\n      [enableSearch]=\"enableSearch\"\r\n      [placeholderSearch]=\"placeholderSearch\">\r\n      <ag-grid-angular\r\n        style=\"width: 100%; height: 700px;\"\r\n        [gridOptions]=\"gridOptions\">\r\n      </ag-grid-angular>\r\n    </ag-grid-expansion>\r\n    `,\r\n    };\r\n  },\r\n  tags: ['autodocs'],\r\n}"
                 },
                 {
                     "name": "SeachAndActions",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                    "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -1252,13 +1252,13 @@
         },
         "groupedEnumerations": {},
         "groupedTypeAliases": {
-            "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts": [
+            "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts": [
                 {
                     "name": "Story",
                     "ctype": "miscellaneous",
                     "subtype": "typealias",
                     "rawtype": "StoryObj<AgGridExtensionComponent>",
-                    "file": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
+                    "file": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "description": "",
@@ -1310,6 +1310,46 @@
                 "coveragePercent": 66,
                 "coverageCount": "6/9",
                 "status": "good"
+            },
+            {
+                "filePath": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "actions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "ContentProjections",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/ag-grid-expansion.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "SeachAndActions",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
             },
             {
                 "filePath": "projects/expansion/ag-grid-angular/src/lib/ag-grid-expansion/components/ag-grid-toolbar-action/ag-grid-toolbar-action.component.ts",
@@ -1372,46 +1412,6 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "pkg",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "actions",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "ContentProjections",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "meta",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "projects/expansion/ag-grid-angular/src/stories/ag-grid-expansion.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "SeachAndActions",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"

@@ -23,12 +23,12 @@ gridOptions.onSelectionChanged = (event: AgGridEvent<any, AgGridContext>) => {
   const { api, context } = event;
   const nodes = api.getSelectedNodes();
   const deleteAction = context.actions?.find(({ icon }) => icon === 'delete');
+  const editAction = context.actions?.find(({ icon }) => icon === 'edit');
   if (deleteAction) {
-    if (nodes.length) {
-      deleteAction.disabled = false;
-    } else {
-      deleteAction.disabled = true;
-    }
+    deleteAction.disabled = nodes.length === 0;
+  }
+  if (editAction) {
+    editAction.disabled = nodes.length === 0;
   }
 };
 gridOptions.onCellValueChanged = (event: AgGridEvent<any, AgGridContext>) => {
@@ -36,17 +36,9 @@ gridOptions.onCellValueChanged = (event: AgGridEvent<any, AgGridContext>) => {
   const redoAction = context.actions?.find(({ icon }) => icon === 'redo');
   const undoAction = context.actions?.find(({ icon }) => icon === 'undo');
   if (redoAction) {
-    if (api.getCurrentRedoSize()) {
-      redoAction.disabled = false;
-    } else {
-      redoAction.disabled = true;
-    }
+    redoAction.disabled = api.getCurrentRedoSize() === 0;
   }
   if (undoAction) {
-    if (api.getCurrentUndoSize()) {
-      undoAction.disabled = false;
-    } else {
-      undoAction.disabled = true;
-    }
+    undoAction.disabled = api.getCurrentUndoSize() === 0;
   }
 };

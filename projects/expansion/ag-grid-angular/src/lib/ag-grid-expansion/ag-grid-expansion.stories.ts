@@ -5,22 +5,35 @@ import {
   AgGridExtensionComponent,
   AgGridToolbarAction,
   actionsSets,
-} from '../public-api';
-import { gridOptions } from './story-helpers/grid-options';
+} from '../../public-api';
+import { gridOptions } from '../../stories/story-helpers/grid-options';
 
 const actions: AgGridToolbarAction[] = [
   {
     clickFn: ({ api }) => {
-      api.applyTransaction({ add: [{}] });
+      const data = { id: Number((Math.random() * 1000).toFixed(0)) };
+      const transaction = api.applyTransaction({ add: [data] });
+      api.flashCells({ rowNodes: transaction?.add });
     },
-    icon: 'add',
+    color: 'seagreen',
+    icon: 'add_circle',
     tooltip: 'Add new row',
+  },
+  {
+    clickFn: () => {
+      alert('Edit action clicked');
+    },
+    color: 'dodgerblue',
+    disabled: true,
+    icon: 'edit',
+    tooltip: 'Edit',
   },
   {
     clickFn: ({ api }) => {
       const rows = api.getSelectedRows();
       api.applyTransaction({ remove: rows });
     },
+    color: 'crimson',
     disabled: true,
     icon: 'delete',
     tooltip: 'Delete selected row(s)',
@@ -43,7 +56,6 @@ const meta: Meta<AgGridExtensionComponent> = {
     return {
       props: {
         ...args,
-        actions,
         gridOptions,
       },
       template: `
@@ -89,7 +101,6 @@ export const ContentProjections: Story = {
   render: (args) => ({
     props: {
       ...args,
-      actions,
       gridOptions,
     },
     template: `
